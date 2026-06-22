@@ -10,9 +10,15 @@ def recherche(caractere):
 if len(motdepasse)<7:
     print("Votre mot de passe est trop court.")
 else: 
+    print("Motdepasseassezlong")
+    nonrepete=0
     for i in range (len(alphabet)):
         if len(motdepasse)<=recherche(alphabet[i])*2.5:
             print("Votre mot de passe contient trop de "+alphabet[i]+" .")
+        else:
+            nonrepete=nonrepete+1
+if nonrepete==94:
+    print("Pasderepetition:)")
         
     
         
