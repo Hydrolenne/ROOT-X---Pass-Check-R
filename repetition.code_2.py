@@ -8,11 +8,11 @@ def recherche(caractere):
             fois=fois+1
     return fois
 if len(motdepasse)<7:
-    print("Mot de passe trop court")
+    print("Votre mot de passe est trop court.")
 else: 
     for i in range (len(alphabet)):
         if len(motdepasse)<=recherche(alphabet[i])*2.5:
-            print("Trop de "+alphabet[i]+" dans le mot de passe.")
+            print("Votre mot de passe contient trop de "+alphabet[i]+" .")
         
     
         
