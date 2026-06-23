@@ -20,6 +20,9 @@ vitesse = 100_000_000_000
 # Temps estimé en secondes
 temps = combinaisons / vitesse
 
+# Sauvegarde du temps total en années pour les tests
+temps_en_annees = temps / (365 * 24 * 3600)
+
 # Conversion en années, jours, heures, minutes, secondes
 annees = int(temps // (365 * 24 * 3600))
 temps %= (365 * 24 * 3600)
@@ -36,13 +39,24 @@ secondes = int(temps % 60)
 # Affichage
 print("\n----- Résultat -----")
 print("Longueur :", len(mot_de_passe))
-print("Combinaisons possibles :", f"{combinaisons:,}".replace(",", " "))
 
-print(
-    f"Temps de craquage estimé : "
-    f"{annees:,} année(s), "
-    f"{jours} jour(s), "
-    f"{heures} heure(s), "
-    f"{minutes} minute(s) et "
-    f"{secondes} seconde(s)"
-)
+if combinaisons > 1_000_000_000:
+    print("Combinaisons possibles : plus de 1 milliard de combinaisons")
+else:
+    print("Combinaisons possibles :", f"{combinaisons:,}".replace(",", " "))
+
+if combinaisons / vitesse < 1:
+    print("Temps de craquage estimé : inférieur à 1 seconde")
+elif temps_en_annees > 1_000_000_000:
+    print("Temps de craquage estimé : plus de 1 milliard d'années")
+else:
+    print(
+        f"Temps de craquage estimé : "
+        f"{annees:,} année(s), "
+        f"{jours} jour(s), "
+        f"{heures} heure(s), "
+        f"{minutes} minute(s) et "
+        f"{secondes} seconde(s)"
+    )
+
+    
