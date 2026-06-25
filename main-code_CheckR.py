@@ -2,6 +2,7 @@ import random
 import time
 import string
 import math
+import os
 
 with open("rockyou.txt", "r", encoding="utf-8", errors="ignore") as f:
     leakedMDP = set(line.strip() for line in f)
@@ -14,6 +15,9 @@ alphabet = (minuscules+majuscules+chiffres+speciaux)
 
 # Création des fonctions de vérification
 check=0
+
+def clear():
+    os.system("cls")
 
 def contenu(mot_de_passe):
     global check
@@ -158,7 +162,8 @@ def generer_mdp(longueur):
 
 
 # Menu principal -----------------------------------------
-print("\n\nBienvenue sur Pass Check'R by Root X!")
+clear()
+print("Bienvenue sur Pass Check'R by Root X!")
 while True:
     print("\n===== PASS Check'R =====")
     print("1. Vérifier la solidité d'un mot de passe")
@@ -167,7 +172,9 @@ while True:
     choix = input("Votre choix: ")
 
     if choix == "1":
+        clear()
         mot_de_passe = input("\n-> Saisissez le mot de passe que vous souhaitez vérifier : ")
+        clear()
         print("\n\n==== Compte rendu pour le mot de passe :", mot_de_passe,"====")
         check=0
         contenu(mot_de_passe)
@@ -188,7 +195,8 @@ while True:
             if test=="Yes" or test=="yes" or test=="y":
                 while True:
                     try:
-                        longueur=int(input("\nLongueur du mot de passe à générer : "))
+                        clear()
+                        longueur=int(input("Longueur du mot de passe à générer : "))
                         if longueur<8:
                             print("La longueur doit être supérieure ou égale à 8.")
                             continue
@@ -198,15 +206,18 @@ while True:
                         break
                     except ValueError:
                         print("Veuillez entrer un nombre valide.")
-            mot_de_passe=generer_mdp(longueur)
-            print("\nMot de passe généré :", mot_de_passe)
-        time.sleep(2)
+                mot_de_passe=generer_mdp(longueur)
+                print("\nMot de passe généré :", mot_de_passe)
+        input("Pressez entrer pour retourner au menu (le terminal sera clear!)")
+        clear()
 
     elif choix == "2":
+        clear()
         while True:
             try:
-                longueur=int(input("\nLongueur du mot de passe à générer : "))
+                longueur=int(input("Longueur du mot de passe à générer : "))
                 if longueur<8:
+                    clear()
                     print("La longueur doit être supérieure ou égale à 8.")
                     continue
                 elif longueur > len(alphabet):
@@ -215,10 +226,12 @@ while True:
                 break
             except ValueError:
                 print("Veuillez entrer un nombre valide.")
+        clear()
         mot_de_passe=generer_mdp(longueur)
         print("\nMot de passe généré :", mot_de_passe)
         test=input("Souhaitez-vous tester le nouveau mot de passe ? (Yes/No) ")
         if test=="Yes" or test=="yes" or test=="y":
+            clear()
             print("\n\n==== Compte rendu pour le mot de passe :", mot_de_passe,"====")
             check=0
             contenu(mot_de_passe)
@@ -233,10 +246,12 @@ while True:
             else:
                 print("\n✘ : Le mot de passe n'est pas suffisamment sécurisé.\nVous pouvez en générer un sécurisé via le choix 2. dans le menu.")
             print("==== Fin du compte rendu ====")
-            time.sleep(2)
+            input("Pressez entrer pour retourner au menu (le terminal sera clear!)")
+            clear()
         else:
             print("Retour au menu.")
-            time.sleep(1)
+            time.sleep(2)
+            clear()
 
     elif choix == "3":
         print("\nMerci d'avoir utilisé Pass Check'R, à bientôt!")
