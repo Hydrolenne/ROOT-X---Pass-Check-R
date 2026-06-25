@@ -13,7 +13,6 @@ speciaux = string.punctuation
 alphabet = (minuscules+majuscules+chiffres+speciaux)
 
 # Création des fonctions de vérification
-
 check=0
 
 def contenu(mot_de_passe):
@@ -115,7 +114,9 @@ def break_time(mot_de_passe):
         print("-> Combinaisons possibles : plus de 1 milliard de combinaisons")
     else:
         print("-> Combinaisons possibles :", f"{combinaisons:,}".replace(",", " "))
-    if combinaisons / vitesse < 1:
+    if mot_de_passe in leakedMDP:
+        print("-> Temps de craquage estimé : Quelques secondes, dû à la présence du mot de passe dans RockYou.txt!")
+    elif combinaisons / vitesse < 1:
         print("-> Temps de craquage estimé : inférieur à 1 seconde")
     elif temps_en_annees > 1_000_000_000:
         print("-> Temps de craquage estimé : plus de 1 milliard d'années")
@@ -176,11 +177,29 @@ while True:
         print("Note globale du mot de passe :",check,"/ 7")
         if check==7:
             print("\n✔ : Le mot de passe est sécurisé.")
+            print("==== Fin du compte rendu ====")
         elif check==6:
             print("\n~ : Le mot de passe n'est pas le plus sécurisé, il peut être amélioré.")
+            print("==== Fin du compte rendu ====")
         else:
-            print("\n✘ : Le mot de passe n'est pas suffisamment sécurisé.\nVous pouvez en générer un sécurisé via le choix 2. dans le menu.")
-        print("==== Fin du compte rendu ====")
+            print("\n✘ : Le mot de passe n'est pas suffisamment sécurisé.")
+            print("==== Fin du compte rendu ====")
+            test=input("Souhaitez-vous générer un mot de passe plus sécurisé ? (Yes/No) ")
+            if test=="Yes" or test=="yes" or test=="y":
+                while True:
+                    try:
+                        longueur=int(input("\nLongueur du mot de passe à générer : "))
+                        if longueur<8:
+                            print("La longueur doit être supérieure ou égale à 8.")
+                            continue
+                        elif longueur > len(alphabet):
+                            print("Longueur trop grande.")
+                            continue
+                        break
+                    except ValueError:
+                        print("Veuillez entrer un nombre valide.")
+            mot_de_passe=generer_mdp(longueur)
+            print("\nMot de passe généré :", mot_de_passe)
         time.sleep(2)
 
     elif choix == "2":
@@ -199,7 +218,7 @@ while True:
         mot_de_passe=generer_mdp(longueur)
         print("\nMot de passe généré :", mot_de_passe)
         test=input("Souhaitez-vous tester le nouveau mot de passe ? (Yes/No) ")
-        if test=="Yes" or test=="yes":
+        if test=="Yes" or test=="yes" or test=="y":
             print("\n\n==== Compte rendu pour le mot de passe :", mot_de_passe,"====")
             check=0
             contenu(mot_de_passe)
