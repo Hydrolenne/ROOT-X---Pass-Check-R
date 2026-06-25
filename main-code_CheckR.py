@@ -165,10 +165,12 @@ def generer_mdp(longueur):
 clear()
 print("Bienvenue sur Pass Check'R by Root X!")
 while True:
-    print("\n===== PASS Check'R =====")
-    print("1. Vérifier la solidité d'un mot de passe")
-    print("2. Générer un mot de passe plus sécurisé")
-    print("3. Quitter Pass Check'R")
+    print("\nI=============================================================================================I",
+      "\nI============================ⓅⒶⓈⓈ ⒸⒽⒺⒸⓀ'Ⓡ====🅜🅔🅝🅤======================================I",
+      "\nI=============================================================================================I")
+    print("𝟙. Vérifier la solidité d'un mot de passe")
+    print("𝟚. Générer un mot de passe plus sécurisé")
+    print("𝟛. Quitter Pass Check'R")
     choix = input("Votre choix: ")
 
     if choix == "1":
